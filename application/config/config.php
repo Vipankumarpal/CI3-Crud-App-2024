@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/CI_Apps/crud_app/';
+$config['base_url'] = 'http://localhost/CI_Learning_2024/crud_app/';
 
 /*
 |--------------------------------------------------------------------------

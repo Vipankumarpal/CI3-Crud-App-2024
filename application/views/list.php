@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud Application - Users List</title>
+    <title>Crud Application - Student List</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/css/bootstrap.min.css';?>" >
     <script type="text/javascript" src="<?php echo base_url().'assets/js/jquery-3.6.4.min.js';?>"></script>
     <script type="text/javascript" src="<?php echo base_url().'assets/js/bootstrap.min.js';?>"></script>
@@ -36,28 +36,36 @@
         </div>
         <!-- <h3 class="float-start my-3" >Users List</h3><a href="<?php //echo base_url().'user/create'; ?>" class="float-end btn btn-primary my-3">Create</a> -->
 
-        <h3 class="float-start my-3" >Users List</h3><a href="javascript:void(0);" onclick="showModal();" class="float-end btn btn-primary my-3">Create</a>
+        <h3 class="float-start my-3" >Student List</h3><a href="<?php echo base_url().'Student/create';?>" class="float-end btn btn-primary my-3">Create</a>
 
         <table class="table table-hover table-bordered table-striped">
             <thead>
                 <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Class</th>
+                <th>Roll No</th>
+                <th>Phone</th>
                 <th>Email</th>
+                <th>Address</th>
                 <th>Action</th>
                
                 </tr>
             </thead>
             <tbody>
                 
-                <?php if(!empty($users)) { foreach($users as $user) { ?>
+                <?php if(!empty($student)) { foreach($student as $stud) { ?>
                 <tr>
-                <th><?php echo $user['user_id']; ?></th>
-                <td><?php echo $user['name']; ?></td>
-                <td><?php echo $user['email']; ?></td>
+                <th><?php echo $stud['id']; ?></th>
+                <td><?php echo $stud['name']; ?></td>
+                <td><?php echo $stud['class']; ?></td>
+                <td><?php echo $stud['rollno']; ?></td>
+                <td><?php echo $stud['phone']; ?></td>
+                <td><?php echo $stud['email']; ?></td>
+                <td><?php echo $stud['address']; ?></td>
                 <td>
-                    <a href="<?php echo base_url().'user/edit/'.$user['user_id']; ?>" class="btn btn-primary">Edit</a>
-                    <a href="<?php echo base_url().'user/delete/'.$user['user_id']; ?>" class="btn btn-danger">Delete</a>
+                    <a href="<?php echo base_url().'Student/edit/'.$stud['id']; ?>" class="btn btn-primary">Edit</a>
+                    <a href="<?php echo base_url().'Student/delete/'.$stud['id']; ?>" class="btn btn-danger">Delete</a>
                 </td>
                 
                 </tr>
@@ -78,63 +86,6 @@
             </table>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="createUser" tabindex="-1" >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create User</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div id="response">
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-
-    <script type="text/javascript">
-        function showModal(){
-            $("#createUser").modal("show");
-
-            $.ajax({
-                url: '<?php echo base_url().'User/create'; ?>',
-                type: 'POST',
-                data: {},
-                dataType: 'json',
-                success: function(response){
-                    $("#response").html(response["html"]);
-                }
-            })
-        }
-
-        $("body").on("submit","#createUser",function(e){
-            e.preventDefault();
-            // alert();
-            $.ajax({
-                url: '<?php echo base_url().'User/save'; ?>',
-                type: 'POST',
-                data: $(this).serializeArray(),
-                dataType: 'json',
-                success: function(response){
-                    //$("#response").html(response["html"]);
-
-                    if(response['status']== 0 ){
-
-                        if(response["name"] != ""){
-                            $(".nameError").html(response["name"]);
-                        }
-
-                        if(response["email"] != ""){
-                            $(".emailError").html(response["email"]);
-                        }
-                    }
-                }
-            })
-            
-        });
-    </script>
+    
 </body>
 </html>
